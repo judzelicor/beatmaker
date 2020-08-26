@@ -15,7 +15,8 @@ class DrumKit {
     this.tomAudio = document.querySelector('.tom-sound');
     this.currentTomAudio = './sounds/tom-808.wav';
     this.selectElement = document.querySelectorAll('select');
-    this.tempoSlider = document.getElementById('tempoSlider')
+    this.tempoSlider = document.getElementById('tempoSlider');
+    this.muteButton = document.querySelectorAll('.mute-button');
     this.index = 0;
     this.bpm = 150;
     this.isPlaying = null;
@@ -124,6 +125,49 @@ class DrumKit {
     }
   }
 
+  muteSound(button) {
+    switch (button.classList[1]) {
+      case 'kick-volume-button':
+        this.kickAudio.volume = 0;
+        break;
+      case 'clap-volume-button':
+        this.clapAudio.volume = 0;
+        break;
+      case 'crash-volume-button':
+        this.crashAudio.volume = 0;
+        break;
+      case 'hithat-volume-button':
+        this.hithatAudio.volume = 0;
+         break;
+      case 'snare-volume-button':
+        this.snareAudio.volume = 0;
+      case 'tom-volume-button':
+        this.tomAudio.volume = 0;
+        break;
+    }
+  }
+
+  unmuteSound(button) {
+    switch (button.classList[1]) {
+      case 'kick-volume-button':
+        this.kickAudio.volume = 1;
+        break;
+      case 'clap-volume-button':
+        this.clapAudio.volume = 1;
+        break;
+      case 'crash-volume-button':
+        this.crashAudio.volume = 1;
+        break;
+      case 'hithat-volume-button':
+        this.hithatAudio.volume = 1;
+         break;
+      case 'snare-volume-button':
+        this.snareAudio.volume = 1;
+      case 'tom-volume-button':
+        this.tomAudio.volume = 1;
+        break;
+    }
+  }
 }
 
 
@@ -155,6 +199,16 @@ drumkit.tempoSlider.addEventListener('change', function (event) {
   drumkit.updateTempo(event);
 })
 
-// drumkit.playButton.addEventListener('click', function () {
-//   drumkit.playButton.classList.add('play-button--active');
-// })
+drumkit.muteButton.forEach(button => {
+  button.addEventListener('click', function (event) {
+    if (!button.classList.contains('muted')) {
+
+      button.classList.add('muted');
+      drumkit.muteSound(button);
+    } else {
+
+      button.classList.remove('muted');
+      drumkit.unmuteSound(button);
+    }
+  })
+})

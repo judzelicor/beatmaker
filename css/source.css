@@ -17,8 +17,11 @@ svg {
 
 .sequencer {
 	display: flex;
-	justify-content: center;
-	margin-top: 32px;
+	margin: 32px;
+}
+
+.col {
+	margin: 0 48px;
 }
 
 .beat-heading {
@@ -29,12 +32,41 @@ svg {
 }
 
 .mute-button {
+	cursor: pointer;
 	background-color: transparent;
 	border: unset;
+	display: inline-block;
+	outline: none;
+	opacity: 0.5;
+	padding: 7px;
 }
 
 .mute-button svg {
 	fill: #fff;
+}
+
+.muted {
+	opacity: 1;
+}
+
+.select {
+	color: #fff;
+	border: unset;
+	border-radius: 7px;
+	padding: 7px 14px;
+	font-size: 18px;
+	font-family: "Teko", sans-serif;
+	width: 120px;
+	font-weight: 300;
+	background: rgb(11, 9, 11);
+	background: linear-gradient(
+		0deg,
+		rgba(11, 9, 11, 1) 0%,
+		rgba(20, 18, 20, 1) 42%,
+		rgba(32, 30, 32, 1) 83%,
+		rgba(54, 54, 54, 1) 100%
+	);
+	margin-bottom: 32px;
 }
 
 .sequencer-controls {
@@ -102,6 +134,9 @@ svg {
 
 .controls {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .pads {
@@ -239,5 +274,11 @@ svg {
 
 	to {
 		transform: scale(1.2);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.sequencer {
+		justify-content: center;
 	}
 }
