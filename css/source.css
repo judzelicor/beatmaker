@@ -190,6 +190,34 @@ svg {
 	transform: scale(1.1);
 }
 
+.tempo {
+	margin: 32px auto;
+	width: 400px;
+}
+
+.tempo h2 {
+	font-family: "Teko", sans-serif;
+	font-size: 24px;
+	font-weight: 400;
+	letter-spacing: 2px;
+	text-align: center;
+}
+
+.tempo-slider {
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin: 16px 0;
+	width: 100%;
+	position: relative;
+	background-color: rgb(255, 255, 255, 0.75);
+	border-radius: 50px;
+	height: 12px;
+}
+
+.tempo-slider:focus {
+	outline: none;
+}
+
 @keyframes textEffect {
 	0% {
 		background-position: top left;

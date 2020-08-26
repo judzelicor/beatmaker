@@ -3,17 +3,26 @@ class DrumKit {
     this.playButton = document.getElementById('playButton')
     this.pads = document.querySelectorAll('.pad');
     this.kickAudio = document.querySelector('.kick-sound');
+    this.currentKickAudio = './sounds/kick-808.wav';
     this.clapAudio = document.querySelector('.clap-sound');
+    this.currentClapAudio = './sounds/clap-808.wav';
     this.crashAudio = document.querySelector('.crash-sound');
+    this.currentCrashAudio = './sounds/crash-808.wav';
     this.hithatAudio = document.querySelector('.hithat-sound');
+    this.currentHithatAudio = './sounds/hihat-808.wav';
     this.snareAudio = document.querySelector('.snare-sound');
+    this.currentSnareAudio = './sounds/snare-808.wav';
     this.tomAudio = document.querySelector('.tom-sound');
+    this.currentTomAudio = './sounds/tom-808.wav';
+    this.selectElement = document.querySelectorAll('select');
+    this.tempoSlider = document.getElementById('tempoSlider')
     this.index = 0;
     this.bpm = 150;
+    this.isPlaying = null;
   }
 
   repeat() {
-    let step = this.index % 6;
+    let step = this.index % 8;
     this.index ++
     const activePads = document.querySelectorAll(`.beat${step}`)
     // loop through pads
@@ -47,14 +56,50 @@ class DrumKit {
         }
       }
     })
-    console.log(step)
   }
 
   start() {
     const interval = (60 / this.bpm) * 1000;
-    setInterval(() => {
-      this.repeat();
-    }, interval);
+    if (!this.isPlaying) {
+      this.isPlaying = setInterval(() => {
+        this.repeat();
+      }, interval);
+    } else {
+      clearInterval(this.isPlaying);
+      this.isPlaying = null;
+    }
+
+    if (!this.isPlaying) {
+      this.playButton.textContent = 'Play'
+    } else {
+      this.playButton.textContent = 'Pause'
+    }
+  }
+
+  changeSound(event) {
+    const selectedOption = event.target.name;
+    const optionValue = event.target.value;
+
+    switch(selectedOption) {
+      case 'kick-select':
+        this.kickAudio.src = optionValue;
+        break;
+      case 'clap-select':
+        this.clapAudio.src = optionValue;
+        break;
+      case 'crash-select':
+        this.crashAudio.src = optionValue;
+        break;
+      case 'hithat-select':
+        this.hithatAudio.src = optionValue;
+        break;
+      case 'snare-select':
+        this.snareAudio.src = optionValue;
+        break;
+      case 'tom-select':
+        this.tomAudio.src = optionValue;
+        break;
+    }
   }
 
   activePad() {
@@ -64,7 +109,23 @@ class DrumKit {
       this.classList.add('pad--active')
     }
   }
+
+  displayTempoText(event) {
+    const currentTempoText = document.getElementById('currentTempo');
+    this.bpm = event.target.value;
+    currentTempoText.textContent = event.target.value;
+  } 
+
+  updateTempo() {
+    clearInterval(this.isPlaying);
+    this.isPlaying = null;
+    if (this.playButton.textContent === 'Pause') {
+      this.start();
+    }
+  }
+
 }
+
 
 
 const drumkit = new DrumKit();
@@ -79,3 +140,21 @@ drumkit.pads.forEach(pad => {
 drumkit.playButton.addEventListener('click', function () {
   drumkit.start();
 })
+
+drumkit.selectElement.forEach(select => {
+  select.addEventListener('change', function () {
+    drumkit.changeSound(event);
+  })
+})
+
+drumkit.tempoSlider.addEventListener('input', function (event) {
+  drumkit.displayTempoText(event);
+})
+
+drumkit.tempoSlider.addEventListener('change', function (event) {
+  drumkit.updateTempo(event);
+})
+
+// drumkit.playButton.addEventListener('click', function () {
+//   drumkit.playButton.classList.add('play-button--active');
+// })
