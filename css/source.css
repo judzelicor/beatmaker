@@ -50,6 +50,8 @@ svg {
 }
 
 .select {
+	box-shadow: 0 0 7px 1px #fff;
+	outline: none;
 	color: #fff;
 	border: unset;
 	border-radius: 7px;
@@ -66,7 +68,7 @@ svg {
 		rgba(32, 30, 32, 1) 83%,
 		rgba(54, 54, 54, 1) 100%
 	);
-	margin-bottom: 32px;
+	margin: 16px 0 32px 0;
 }
 
 .sequencer-controls {
