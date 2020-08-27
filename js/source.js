@@ -8,8 +8,8 @@ class DrumKit {
     this.currentClapAudio = './sounds/clap-808.wav';
     this.crashAudio = document.querySelector('.crash-sound');
     this.currentCrashAudio = './sounds/crash-808.wav';
-    this.hithatAudio = document.querySelector('.hithat-sound');
-    this.currentHithatAudio = './sounds/hihat-808.wav';
+    this.hihatAudio = document.querySelector('.hihat-sound');
+    this.currentHihatAudio = './sounds/hihat-808.wav';
     this.snareAudio = document.querySelector('.snare-sound');
     this.currentSnareAudio = './sounds/snare-808.wav';
     this.tomAudio = document.querySelector('.tom-sound');
@@ -43,9 +43,9 @@ class DrumKit {
           this.crashAudio.play();
           this.crashAudio.currentTime = 0;
         }
-        if (pad.classList.contains('hithat-pad')) {
-          this.hithatAudio.play();
-          this.hithatAudio.currentTime = 0;
+        if (pad.classList.contains('hihat-pad')) {
+          this.hihatAudio.play();
+          this.hihatAudio.currentTime = 0;
         }
         if (pad.classList.contains('snare-pad')) {
           this.snareAudio.play();
@@ -80,7 +80,7 @@ class DrumKit {
   changeSound(event) {
     const selectedOption = event.target.name;
     const optionValue = event.target.value;
-
+    console.log(optionValue)
     switch(selectedOption) {
       case 'kick-select':
         this.kickAudio.src = optionValue;
@@ -91,8 +91,8 @@ class DrumKit {
       case 'crash-select':
         this.crashAudio.src = optionValue;
         break;
-      case 'hithat-select':
-        this.hithatAudio.src = optionValue;
+      case 'hihat-select':
+        this.hihatAudio.src = optionValue;
         break;
       case 'snare-select':
         this.snareAudio.src = optionValue;
@@ -136,8 +136,8 @@ class DrumKit {
       case 'crash-volume-button':
         this.crashAudio.volume = 0;
         break;
-      case 'hithat-volume-button':
-        this.hithatAudio.volume = 0;
+      case 'hihat-volume-button':
+        this.hihatAudio.volume = 0;
          break;
       case 'snare-volume-button':
         this.snareAudio.volume = 0;
@@ -158,8 +158,8 @@ class DrumKit {
       case 'crash-volume-button':
         this.crashAudio.volume = 1;
         break;
-      case 'hithat-volume-button':
-        this.hithatAudio.volume = 1;
+      case 'hihat-volume-button':
+        this.hihatAudio.volume = 1;
          break;
       case 'snare-volume-button':
         this.snareAudio.volume = 1;
